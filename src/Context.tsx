@@ -1,19 +1,24 @@
-'use client'
+"use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { User } from "./Types";
+import { User, Product, LogedUsers } from "./Types";
 
 type AppContextType = {
   user: User[];
   setUser: any;
+  products: Product[];
+  setProducts: any;
+  setViewUser: any;
+  viewUser: any;
+  usersLog: LogedUsers[];
+  isLoggedIn: boolean | null;
+  setIsLoggedIn:any;
 };
-
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-    
   const [user, setUser] = useState<User[]>([
     {
       id: 1,
@@ -177,8 +182,200 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       active: "passive",
     },
   ]);
+
+  const [products, setProducts] = useState<any[]>([
+    {
+      id: 1,
+      title: "Зловещие мертвецы",
+      description: "Ужасный фильм о проклятом лесу и его жителях.",
+      price: 499.99,
+      createdAt: "2023-01-01",
+      stock: 10,
+    },
+    {
+      id: 2,
+      title: "Блэйд",
+      description: "Полувампир, полудемон сражается с другими вампирами.",
+      price: 299.99,
+      createdAt: "2023-02-01",
+      stock: 5,
+    },
+    {
+      id: 3,
+      title: "Сверхъестественное",
+      description:
+        "Истории о двух братьях, охотящихся на сверхъестественные существа.",
+      price: 199.99,
+      createdAt: "2023-03-01",
+      stock: 20,
+    },
+    {
+      id: 4,
+      title: "Терминатор",
+      description: "Классический sci-fi фильм о борьбе человека с машинами.",
+      price: 399.99,
+      createdAt: "2023-04-01",
+      stock: 7,
+    },
+    {
+      id: 5,
+      title: "Темный рыцарь",
+      description: "Фильм о Бэтмене и его борьбе с Джокером.",
+      price: 450.0,
+      createdAt: "2023-05-01",
+      stock: 3,
+    },
+    {
+      id: 6,
+      title: "Исполнитель желаний",
+      description:
+        "Фантастическая история о том, как мечты могут стать реальностью.",
+      price: 250.0,
+      createdAt: "2023-06-01",
+      stock: 12,
+    },
+    {
+      id: 7,
+      title: "Пацаны",
+      description: "Сатирический взгляд на супергероев и их недостатки.",
+      price: 320.0,
+      createdAt: "2023-07-01",
+      stock: 15,
+    },
+    {
+      id: 8,
+      title: "Матрица",
+      description: "Фильм о том, что реальность может быть иллюзией.",
+      price: 450.0,
+      createdAt: "2023-08-01",
+      stock: 6,
+    },
+    {
+      id: 9,
+      title: "Крик",
+      description: "Слэшер о маньяке, терроризирующем молодежь.",
+      price: 350.0,
+      createdAt: "2023-09-01",
+      stock: 8,
+    },
+    {
+      id: 10,
+      title: "Кобра Кай",
+      description: "Современное продолжение классической истории о карате.",
+      price: 300.0,
+      createdAt: "2023-10-01",
+      stock: 10,
+    },
+    {
+      id: 11,
+      title: "Миссия невыполнима",
+      description: "Серия фильмов о шпионе Итане Ханте и его приключениях.",
+      price: 500.0,
+      createdAt: "2023-11-01",
+      stock: 5,
+    },
+    {
+      id: 12,
+      title: "Ранго",
+      description: "Анимационный фильм о ящерице, ставшей героем.",
+      price: 250.0,
+      createdAt: "2023-12-01",
+      stock: 10,
+    },
+    {
+      id: 13,
+      title: "Джанго освобожденный",
+      description:
+        "Фильм о свободном чернокожем рабе, стремящемся спасти свою жену.",
+      price: 400.0,
+      createdAt: "2024-01-01",
+      stock: 4,
+    },
+    {
+      id: 14,
+      title: "Бесславные ублюдки",
+      description:
+        "История о группе еврейских солдат, пытающихся уничтожить нацистов.",
+      price: 450.0,
+      createdAt: "2024-02-01",
+      stock: 9,
+    },
+    {
+      id: 15,
+      title: "Счастливое число Слевина",
+      description:
+        "Триллер о мужчине, оказавшемся в ловушке между преступными группировками.",
+      price: 350.0,
+      createdAt: "2024-03-01",
+      stock: 8,
+    },
+    {
+      id: 16,
+      title: "Оппенгеймер",
+      description: "Биографический фильм о создателе атомной бомбы.",
+      price: 550.0,
+      createdAt: "2024-04-01",
+      stock: 6,
+    },
+    {
+      id: 17,
+      title: "Безумный Макс: Дорога ярости",
+      description:
+        "Экшн-фильм о постапокалиптическом мире и борьбе за выживание.",
+      price: 399.99,
+      createdAt: "2024-05-01",
+      stock: 5,
+    },
+    {
+      id: 18,
+      title: "Звёздные войны: Эпизод 3 – Месть ситхов",
+      description:
+        "Кульминация саги о Звёздных войнах и падении Anakin Skywalker.",
+      price: 450.0,
+      createdAt: "2024-06-01",
+      stock: 12,
+    },
+    {
+      id: 19,
+      title: "Человек-паук",
+      description: "История о подростке, получившем суперспособности.",
+      price: 300.0,
+      createdAt: "2024-07-01",
+      stock: 20,
+    },
+    {
+      id: 20,
+      title: "Бегущий по лезвию 2049",
+      description:
+        "Сиквел классического фильма о репликантах и человеческой природе.",
+      price: 550.0,
+      createdAt: "2024-08-01",
+      stock: 7,
+    },
+  ]);
+
+  const [viewUser, setViewUser] = useState<any>({});
+
+  const [usersLog, setUsersLog] = useState<LogedUsers[]>([
+    { email: "girildaaa@gmail.com", password: "5660770m" },
+  ]);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider
+      value={{
+        user,
+        setUser,
+        products,
+        setProducts,
+        viewUser,
+        setViewUser,
+        usersLog,
+        isLoggedIn,
+        setIsLoggedIn,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

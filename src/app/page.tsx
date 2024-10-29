@@ -1,14 +1,9 @@
-import NavBar from "@/components/navBar/NavBar";
-// import Page from "./users/page";
-import { AppProvider } from "@/Context";
-import Page from "../app/addUser/page";
+import HeaderNavBar from "../components/navBar/HeaderBar";
+
 export default function Home() {
   return (
-    <AppProvider>
-      <div style={{ display: "flex" }}>
-        <NavBar />
-        <Page />
-      </div>
-    </AppProvider>
+    <div>
+      <HeaderNavBar />
+    </div>
   );
 }
